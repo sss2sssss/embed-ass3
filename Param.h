@@ -6,4 +6,7 @@
 //#define    LED1    LATBbits.LATB10
 //#define    LED2    LATBbits.LATB11
 
+#define		LED				LATBbits.LATB11
+//#define		resetPin		LATBbits.LATB2
+
 #endif
