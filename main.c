@@ -8,6 +8,7 @@
 #include "UART.h"
 #include "Param.h"
 #include "Wifi.h"
+#include "ADC.h"
 
 _FOSCSEL(FNOSC_FRC & IESO_OFF)
 _FOSC(OSCIOFNC_ON & IOL1WAY_ON & FCKSM_CSDCMD)
@@ -20,7 +21,9 @@ int main()
 	__delay_ms(5);
 	IO_Init();
 	MCU_Init();
-	WriteStringUART1("AT+RST\r");
+	ADC_Init();
+	ADC_ON;
+	//WriteStringUART1("AT+RST\r");
 
 
 	while(1)

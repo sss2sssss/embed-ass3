@@ -9,4 +9,6 @@ void IO_Init()
 	RPINR18bits.U1RXR = 0b00100;			// U1RX
 	TRISBbits.TRISB3 = 0;					// U1TX
 	TRISBbits.TRISB4 = 1;					// U1RX
+
+	TRISAbits.TRISA0 = 1;
 }

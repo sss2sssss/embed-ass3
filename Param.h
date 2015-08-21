@@ -9,4 +9,6 @@
 #define		LED				LATBbits.LATB11
 //#define		resetPin		LATBbits.LATB2
 
+extern unsigned int temp_out;
+
 #endif
