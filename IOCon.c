@@ -10,5 +10,5 @@ void IO_Init()
 	TRISBbits.TRISB3 = 0;					// U1TX
 	TRISBbits.TRISB4 = 1;					// U1RX
 
-	TRISAbits.TRISA0 = 1;
+	TRISAbits.TRISA0 = 1;					//ADC
 }

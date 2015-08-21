@@ -74,10 +74,11 @@ Program Memory  [Origin = 0x200, Length = 0x15600]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x2e4           0x456  (1110)
-.text                        0x4e4               0x286           0x3c9  (969)
-.dinit                       0x76a                 0xe            0x15  (21)
+.const                       0x4e4                0x3c            0x5a  (90)
+.text                        0x520               0x2cc           0x432  (1074)
+.dinit                       0x7ec                0x16            0x21  (33)
 
-                     Total program memory used (bytes):          0x834  (2100) 1%
+                     Total program memory used (bytes):          0x903  (2307) 1%
 
 
 Data Memory  [Origin = 0x800, Length = 0x4000]
@@ -85,9 +86,11 @@ Data Memory  [Origin = 0x800, Length = 0x4000]
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .icd                         0x800                0x50            0x50  (80)
-.nbss                        0x850                   0             0x8  (8)
+.nbss                        0x850                   0             0x6  (6)
+.ndata                       0x856                   0             0x2  (2)
+.nbss                        0x858                   0             0x2  (2)
 
-                        Total data memory used (bytes):           0x58  (88) <1%
+                        Total data memory used (bytes):           0x5a  (90) <1%
 
 
 Dynamic Memory Usage
@@ -95,9 +98,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x858                              0x3fa8  (16296)
+stack                        0x85a                              0x3fa6  (16294)
 
-                        Maximum dynamic memory (bytes):         0x3fa8  (16296)
+                        Maximum dynamic memory (bytes):         0x3fa6  (16294)
 
 
 External Symbols in Data Memory (by address):
@@ -105,13 +108,15 @@ External Symbols in Data Memory (by address):
                     0x0850                  _ADCValue
                     0x0852                  _temp_out
                     0x0854                  _ADCPtr
-                    0x0856                  _tempRX
+                    0x0856                  _mode
+                    0x0858                  _tempRX
 
 External Symbols in Data Memory (by name):
 
                     0x0854                  _ADCPtr
                     0x0850                  _ADCValue
-                    0x0856                  _tempRX
+                    0x0856                  _mode
+                    0x0858                  _tempRX
                     0x0852                  _temp_out
 
 External Symbols in Program Memory (by address):
@@ -133,33 +138,33 @@ External Symbols in Program Memory (by address):
                   0x000468                  __fbopReturnNaN
                   0x00046e                  __fpack
                   0x0004ba                  __funpack
-                  0x0004e4                  _UART1_Init
-                  0x000546                  _WriteUART1
-                  0x00056e                  _WriteUART1dec2string
-                  0x0005f0                  _WriteStringUART1
-                  0x00060e                  __U1TXInterrupt
-                  0x000622                  __U1RXInterrupt
-                  0x00063a                  _ADC_Init
-                  0x0006b0                  _ADC_Convert
-                  0x0006ec                  __ADC1Interrupt
-                  0x000712                  _IO_Init
-                  0x000734                  _MCU_Init
-                  0x000756                  _main
+                  0x000520                  _UART1_Init
+                  0x000582                  _WriteUART1
+                  0x0005aa                  _WriteUART1dec2string
+                  0x00062c                  _WriteStringUART1
+                  0x00064a                  __U1TXInterrupt
+                  0x00065e                  __U1RXInterrupt
+                  0x000676                  _ADC_Init
+                  0x0006ec                  _ADC_Convert
+                  0x000728                  __ADC1Interrupt
+                  0x00073c                  _main
+                  0x0007a8                  _IO_Init
+                  0x0007ca                  _MCU_Init
 
 External Symbols in Program Memory (by name):
 
-                  0x0006b0                  _ADC_Convert
-                  0x00063a                  _ADC_Init
-                  0x000712                  _IO_Init
-                  0x000734                  _MCU_Init
-                  0x0004e4                  _UART1_Init
-                  0x0005f0                  _WriteStringUART1
-                  0x000546                  _WriteUART1
-                  0x00056e                  _WriteUART1dec2string
-                  0x0006ec                  __ADC1Interrupt
+                  0x0006ec                  _ADC_Convert
+                  0x000676                  _ADC_Init
+                  0x0007a8                  _IO_Init
+                  0x0007ca                  _MCU_Init
+                  0x000520                  _UART1_Init
+                  0x00062c                  _WriteStringUART1
+                  0x000582                  _WriteUART1
+                  0x0005aa                  _WriteUART1dec2string
+                  0x000728                  __ADC1Interrupt
                   0x0002b6                  __DefaultInterrupt
-                  0x000622                  __U1RXInterrupt
-                  0x00060e                  __U1TXInterrupt
+                  0x00065e                  __U1RXInterrupt
+                  0x00064a                  __U1TXInterrupt
                   0x00023c                  ___delay32
                   0x0002be                  ___divsf3
                   0x0003aa                  ___fixunssfsi
@@ -176,7 +181,7 @@ External Symbols in Program Memory (by name):
                   0x00043e                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000756                  _main
+                  0x00073c                  _main
 
 Memory Configuration
 
@@ -381,9 +386,9 @@ __FUID3
                   0x000024          0x4 LONG 0x2b6 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000026          0x4 LONG 0x2b6 DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x2b6 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002a          0x4 LONG 0x622 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002c          0x4 LONG 0x60e DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002e          0x4 LONG 0x6ec DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002a          0x4 LONG 0x65e DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002c          0x4 LONG 0x64a DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002e          0x4 LONG 0x728 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000030          0x4 LONG 0x2b6 DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000032          0x4 LONG 0x2b6 DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
                   0x000034          0x4 LONG 0x2b6 DEFINED (__SI2C1Interrupt)?ABSOLUTE (__SI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -509,9 +514,9 @@ __FUID3
                   0x000124          0x4 LONG 0x2b6 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000126          0x4 LONG 0x2b6 DEFINED (__AltSPI1ErrInterrupt)?ABSOLUTE (__AltSPI1ErrInterrupt):DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000128          0x4 LONG 0x2b6 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012a          0x4 LONG 0x622 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012c          0x4 LONG 0x60e DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012e          0x4 LONG 0x6ec DEFINED (__AltADC1Interrupt)?ABSOLUTE (__AltADC1Interrupt):DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012a          0x4 LONG 0x65e DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012c          0x4 LONG 0x64a DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012e          0x4 LONG 0x728 DEFINED (__AltADC1Interrupt)?ABSOLUTE (__AltADC1Interrupt):DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000130          0x4 LONG 0x2b6 DEFINED (__AltDMA1Interrupt)?ABSOLUTE (__AltDMA1Interrupt):DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000132          0x4 LONG 0x2b6 DEFINED (__AltInterrupt15)?ABSOLUTE (__AltInterrupt15):DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
                   0x000134          0x4 LONG 0x2b6 DEFINED (__AltSI2C1Interrupt)?ABSOLUTE (__AltSI2C1Interrupt):DEFINED (__SI2C1Interrupt)?ABSOLUTE (__SI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1748,32 +1753,41 @@ __c30_signature
  __c30_signature
                   0x000066          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack.o)
 
-.nbss               0x0850          0x8
+.nbss               0x0850          0x6
  .nbss              0x0850          0x6 ADC.o
                     0x0850                  ADCValue
                     0x0852                  temp_out
                     0x0854                  ADCPtr
- .nbss              0x0856          0x2 UART.o
-                    0x0856                  tempRX
 
-.text             0x0004e4        0x286
- .text            0x0004e4        0x156 UART.o
-                  0x0004e4                  UART1_Init
-                  0x000546                  WriteUART1
-                  0x00056e                  WriteUART1dec2string
-                  0x0005f0                  WriteStringUART1
-                  0x00060e                  _U1TXInterrupt
-                  0x000622                  _U1RXInterrupt
- .text            0x00063a         0xd8 ADC.o
-                  0x00063a                  ADC_Init
-                  0x0006b0                  ADC_Convert
-                  0x0006ec                  _ADC1Interrupt
- .text            0x000712         0x22 IOCon.o
-                  0x000712                  IO_Init
- .text            0x000734         0x22 System.o
-                  0x000734                  MCU_Init
- .text            0x000756         0x14 main.o
-                  0x000756                  main
+.ndata              0x0856          0x2
+ .ndata             0x0856          0x2 main.o
+                    0x0856                  mode
 
-.dinit            0x00076a          0xe
- .dinit           0x00076a          0xe data_init
+.nbss               0x0858          0x2
+ .nbss              0x0858          0x2 UART.o
+                    0x0858                  tempRX
+
+.const              0x84e4         0x3c load address 0x0004e4  
+ .const             0x84e4         0x3c main.o
+
+.text             0x000520        0x2cc
+ .text            0x000520        0x156 UART.o
+                  0x000520                  UART1_Init
+                  0x000582                  WriteUART1
+                  0x0005aa                  WriteUART1dec2string
+                  0x00062c                  WriteStringUART1
+                  0x00064a                  _U1TXInterrupt
+                  0x00065e                  _U1RXInterrupt
+ .text            0x000676         0xc6 ADC.o
+                  0x000676                  ADC_Init
+                  0x0006ec                  ADC_Convert
+                  0x000728                  _ADC1Interrupt
+ .text            0x00073c         0x6c main.o
+                  0x00073c                  main
+ .text            0x0007a8         0x22 IOCon.o
+                  0x0007a8                  IO_Init
+ .text            0x0007ca         0x22 System.o
+                  0x0007ca                  MCU_Init
+
+.dinit            0x0007ec         0x16
+ .dinit           0x0007ec         0x16 data_init
