@@ -91,12 +91,12 @@ Program Memory  [Origin = 0x200, Length = 0x15600]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x454           0x67e  (1662)
-.const                       0x654              0x15ca          0x20af  (8367)
-.text                       0x1c1e              0x2018          0x3024  (12324)
-.dinit                      0x3c36                0x34            0x4e  (78)
-.text                       0x3c6a                0x22            0x33  (51)
+.const                       0x654              0x175e          0x230d  (8973)
+.text                       0x1db2              0x21e0          0x32d0  (13008)
+.dinit                      0x3f92                0x36            0x51  (81)
+.text                       0x3fc8                0x22            0x33  (51)
 
-                     Total program memory used (bytes):         0x57d2  (22482) 17%
+                     Total program memory used (bytes):         0x5cdf  (23775) 18%
 
 
 Data Memory  [Origin = 0x800, Length = 0x4000]
@@ -107,10 +107,10 @@ section                    address      alignment gaps    total length  (dec)
 .nbss                        0x850                   0            0x18  (24)
 .ndata                       0x868                   0             0x8  (8)
 .nbss                        0x870                   0             0x6  (6)
-.ndata                       0x876                   0             0x2  (2)
-.nbss                        0x878                   0             0x4  (4)
+.ndata                       0x876                   0             0x4  (4)
+.nbss                        0x87a                   0             0x4  (4)
 
-                        Total data memory used (bytes):           0x7c  (124) <1%
+                        Total data memory used (bytes):           0x7e  (126) <1%
 
 
 Dynamic Memory Usage
@@ -118,9 +118,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x87c                              0x3f84  (16260)
+stack                        0x87e                              0x3f82  (16258)
 
-                        Maximum dynamic memory (bytes):         0x3f84  (16260)
+                        Maximum dynamic memory (bytes):         0x3f82  (16258)
 
 
 External Symbols in Data Memory (by address):
@@ -142,15 +142,16 @@ External Symbols in Data Memory (by address):
                     0x0872                  _temp_out
                     0x0874                  _ADCPtr
                     0x0876                  _mode
-                    0x0878                  _tempRX
-                    0x087a                  _Cycle1
+                    0x0878                  _temp_mode
+                    0x087a                  _tempRX
+                    0x087c                  _Cycle1
 
 External Symbols in Data Memory (by name):
 
                     0x0874                  _ADCPtr
                     0x0870                  _ADCValue
                     0x0850                  _BACK_COLOR
-                    0x087a                  _Cycle1
+                    0x087c                  _Cycle1
                     0x0852                  _POINT_COLOR
                     0x0854                  _bitdata
                     0x086c                  _chx
@@ -160,7 +161,8 @@ External Symbols in Data Memory (by name):
                     0x0862                  _key_buffer
                     0x085e                  _key_count
                     0x0876                  _mode
-                    0x0878                  _tempRX
+                    0x087a                  _tempRX
+                    0x0878                  _temp_mode
                     0x0872                  _temp_out
                     0x0856                  _tp_pixad
                     0x085a                  _tp_pixlcd
@@ -201,118 +203,127 @@ External Symbols in Program Memory (by address):
                   0x0006bf                  _image
                   0x00133f                  _hanzi
                   0x00143f                  _asc2_1608
-                  0x001c1e                  _LCD_Init
-                  0x001db4                  _LCD_Clear
-                  0x001df2                  _LCD_Writ_Bus
-                  0x001dfe                  _LCD_WR_DATA
-                  0x001e1a                  _LCD_WR_DATA8
-                  0x001e28                  _LCD_WR_REG
-                  0x001e36                  _LCD_WR_REG_DATA
-                  0x001e4c                  _Address_set
-                  0x001eae                  _showhanzi
-                  0x001f24                  _LCD_DrawPoint
-                  0x001f3e                  _LCD_DrawPoint_big
-                  0x001f60                  _LCD_DrawLine
-                  0x00203e                  _LCD_DrawRectangle
-                  0x002074                  _LCD_DrawCircle
-                  0x00217c                  _LCD_SquareButton
-                  0x0022a8                  _LCD_Fill
-                  0x0022ea                  _LCD_ShowChar
-                  0x002404                  _LCD_ShowNum
-                  0x0024a6                  _LCD_Show2Num
-                  0x00250a                  _LCD_ShowString
-                  0x00255e                  _mypow
-                  0x0025aa                  _tpstate
-                  0x0025b8                  _spistar
-                  0x0025c6                  _WriteCharTo7843
-                  0x00260e                  _ReadFromCharFrom7843
-                  0x002654                  _ADS_Read_AD
-                  0x002682                  _ADS_Read_XY
-                  0x002738                  _Read_ADS
-                  0x002774                  _Read_ADS2
-                  0x002816                  _Read_TP_Once
-                  0x002866                  _Draw_Touch_Point
-                  0x0028c4                  _Convert_Pos
-                  0x0029ba                  _Touch_Adjust
-                  0x0031da                  _point
-                  0x003264                  _Touch_SquareDetect
-                  0x003364                  _main
-                  0x0034ce                  _LCD_Show
-                  0x003544                  _PassKey
-                  0x0036d6                  _KeyPress
-                  0x0037dc                  _KeyDisplay
-                  0x003908                  _UART1_Init
-                  0x003966                  _WriteUART1
-                  0x00398e                  _WriteUART1dec2string
-                  0x0039a4                  _WriteStringUART1
-                  0x0039c2                  __U1TXInterrupt
-                  0x0039d6                  __U1RXInterrupt
-                  0x0039ee                  _ADC_Init
-                  0x003a56                  _ADC_Convert
-                  0x003ad4                  _Timer1_Init
-                  0x003b02                  __T1Interrupt
-                  0x003b28                  _LED_Blinking
-                  0x003b58                  _PPS_Unlock
-                  0x003b60                  _PPS_Lock
-                  0x003b68                  _SPI1_Init
-                  0x003ba6                  _SPI1_SendReceiveData8
-                  0x003bce                  _IO_Init
-                  0x003c6a                  _MCU_Init
+                  0x001db2                  _LCD_Init
+                  0x001f48                  _LCD_Clear
+                  0x001f86                  _LCD_Writ_Bus
+                  0x001f92                  _LCD_WR_DATA
+                  0x001fae                  _LCD_WR_DATA8
+                  0x001fbc                  _LCD_WR_REG
+                  0x001fca                  _LCD_WR_REG_DATA
+                  0x001fe0                  _Address_set
+                  0x002042                  _showhanzi
+                  0x0020b8                  _LCD_DrawPoint
+                  0x0020d2                  _LCD_DrawPoint_big
+                  0x0020f4                  _LCD_DrawLine
+                  0x0021d2                  _LCD_DrawRectangle
+                  0x002208                  _LCD_DrawCircle
+                  0x002310                  _LCD_SquareButton
+                  0x00243c                  _LCD_Fill
+                  0x00247e                  _LCD_ShowChar
+                  0x002598                  _LCD_ShowNum
+                  0x00263a                  _LCD_Show2Num
+                  0x00269e                  _LCD_ShowString
+                  0x0026f2                  _mypow
+                  0x00273e                  _tpstate
+                  0x00274c                  _spistar
+                  0x00275a                  _WriteCharTo7843
+                  0x0027a2                  _ReadFromCharFrom7843
+                  0x0027e8                  _ADS_Read_AD
+                  0x002816                  _ADS_Read_XY
+                  0x0028cc                  _Read_ADS
+                  0x002908                  _Read_ADS2
+                  0x0029aa                  _Read_TP_Once
+                  0x0029fa                  _Draw_Touch_Point
+                  0x002a58                  _Convert_Pos
+                  0x002b4e                  _Touch_Adjust
+                  0x00336e                  _point
+                  0x0033f8                  _Touch_SquareDetect
+                  0x0034f8                  _main
+                  0x0035f2                  _LCD_Show
+                  0x00366c                  _PassKey
+                  0x00387c                  _KeyPress
+                  0x003982                  _KeyDisplay
+                  0x003a96                  _main_page
+                  0x003ba2                  _UART1_Init
+                  0x003c00                  _WriteUART1
+                  0x003c28                  _WriteUART1dec2string
+                  0x003c3e                  _WriteStringUART1
+                  0x003c5c                  __U1TXInterrupt
+                  0x003c70                  __U1RXInterrupt
+                  0x003c88                  _ADC_Init
+                  0x003cf0                  _ADC_Convert
+                  0x003d6e                  _WifiReset
+                  0x003d7e                  _ConnectAP
+                  0x003d98                  _TCPServer
+                  0x003db2                  _StartConnect
+                  0x003e30                  _Timer1_Init
+                  0x003e5e                  __T1Interrupt
+                  0x003e84                  _LED_Blinking
+                  0x003eb4                  _PPS_Unlock
+                  0x003ebc                  _PPS_Lock
+                  0x003ec4                  _SPI1_Init
+                  0x003f02                  _SPI1_SendReceiveData8
+                  0x003f2a                  _IO_Init
+                  0x003fc8                  _MCU_Init
 
 External Symbols in Program Memory (by name):
 
-                  0x003a56                  _ADC_Convert
-                  0x0039ee                  _ADC_Init
-                  0x002654                  _ADS_Read_AD
-                  0x002682                  _ADS_Read_XY
-                  0x001e4c                  _Address_set
-                  0x0028c4                  _Convert_Pos
-                  0x002866                  _Draw_Touch_Point
-                  0x003bce                  _IO_Init
-                  0x0037dc                  _KeyDisplay
-                  0x0036d6                  _KeyPress
-                  0x001db4                  _LCD_Clear
-                  0x002074                  _LCD_DrawCircle
-                  0x001f60                  _LCD_DrawLine
-                  0x001f24                  _LCD_DrawPoint
-                  0x001f3e                  _LCD_DrawPoint_big
-                  0x00203e                  _LCD_DrawRectangle
-                  0x0022a8                  _LCD_Fill
-                  0x001c1e                  _LCD_Init
-                  0x0034ce                  _LCD_Show
-                  0x0024a6                  _LCD_Show2Num
-                  0x0022ea                  _LCD_ShowChar
-                  0x002404                  _LCD_ShowNum
-                  0x00250a                  _LCD_ShowString
-                  0x00217c                  _LCD_SquareButton
-                  0x001dfe                  _LCD_WR_DATA
-                  0x001e1a                  _LCD_WR_DATA8
-                  0x001e28                  _LCD_WR_REG
-                  0x001e36                  _LCD_WR_REG_DATA
-                  0x001df2                  _LCD_Writ_Bus
-                  0x003b28                  _LED_Blinking
-                  0x003c6a                  _MCU_Init
-                  0x003b60                  _PPS_Lock
-                  0x003b58                  _PPS_Unlock
-                  0x003544                  _PassKey
-                  0x00260e                  _ReadFromCharFrom7843
-                  0x002738                  _Read_ADS
-                  0x002774                  _Read_ADS2
-                  0x002816                  _Read_TP_Once
-                  0x003b68                  _SPI1_Init
-                  0x003ba6                  _SPI1_SendReceiveData8
-                  0x003ad4                  _Timer1_Init
-                  0x0029ba                  _Touch_Adjust
-                  0x003264                  _Touch_SquareDetect
-                  0x003908                  _UART1_Init
-                  0x0025c6                  _WriteCharTo7843
-                  0x0039a4                  _WriteStringUART1
-                  0x003966                  _WriteUART1
-                  0x00398e                  _WriteUART1dec2string
+                  0x003cf0                  _ADC_Convert
+                  0x003c88                  _ADC_Init
+                  0x0027e8                  _ADS_Read_AD
+                  0x002816                  _ADS_Read_XY
+                  0x001fe0                  _Address_set
+                  0x003d7e                  _ConnectAP
+                  0x002a58                  _Convert_Pos
+                  0x0029fa                  _Draw_Touch_Point
+                  0x003f2a                  _IO_Init
+                  0x003982                  _KeyDisplay
+                  0x00387c                  _KeyPress
+                  0x001f48                  _LCD_Clear
+                  0x002208                  _LCD_DrawCircle
+                  0x0020f4                  _LCD_DrawLine
+                  0x0020b8                  _LCD_DrawPoint
+                  0x0020d2                  _LCD_DrawPoint_big
+                  0x0021d2                  _LCD_DrawRectangle
+                  0x00243c                  _LCD_Fill
+                  0x001db2                  _LCD_Init
+                  0x0035f2                  _LCD_Show
+                  0x00263a                  _LCD_Show2Num
+                  0x00247e                  _LCD_ShowChar
+                  0x002598                  _LCD_ShowNum
+                  0x00269e                  _LCD_ShowString
+                  0x002310                  _LCD_SquareButton
+                  0x001f92                  _LCD_WR_DATA
+                  0x001fae                  _LCD_WR_DATA8
+                  0x001fbc                  _LCD_WR_REG
+                  0x001fca                  _LCD_WR_REG_DATA
+                  0x001f86                  _LCD_Writ_Bus
+                  0x003e84                  _LED_Blinking
+                  0x003fc8                  _MCU_Init
+                  0x003ebc                  _PPS_Lock
+                  0x003eb4                  _PPS_Unlock
+                  0x00366c                  _PassKey
+                  0x0027a2                  _ReadFromCharFrom7843
+                  0x0028cc                  _Read_ADS
+                  0x002908                  _Read_ADS2
+                  0x0029aa                  _Read_TP_Once
+                  0x003ec4                  _SPI1_Init
+                  0x003f02                  _SPI1_SendReceiveData8
+                  0x003db2                  _StartConnect
+                  0x003d98                  _TCPServer
+                  0x003e30                  _Timer1_Init
+                  0x002b4e                  _Touch_Adjust
+                  0x0033f8                  _Touch_SquareDetect
+                  0x003ba2                  _UART1_Init
+                  0x003d6e                  _WifiReset
+                  0x00275a                  _WriteCharTo7843
+                  0x003c3e                  _WriteStringUART1
+                  0x003c00                  _WriteUART1
+                  0x003c28                  _WriteUART1dec2string
                   0x0002b6                  __DefaultInterrupt
-                  0x003b02                  __T1Interrupt
-                  0x0039d6                  __U1RXInterrupt
-                  0x0039c2                  __U1TXInterrupt
+                  0x003e5e                  __T1Interrupt
+                  0x003c70                  __U1RXInterrupt
+                  0x003c5c                  __U1TXInterrupt
                   0x000408                  ___addsf3
                   0x00023c                  ___delay32
                   0x0002be                  ___divsf3
@@ -343,12 +354,13 @@ External Symbols in Program Memory (by name):
                   0x00133f                  _hanzi
                   0x0006bf                  _image
                   0x000638                  _itoa
-                  0x003364                  _main
-                  0x00255e                  _mypow
-                  0x0031da                  _point
-                  0x001eae                  _showhanzi
-                  0x0025b8                  _spistar
-                  0x0025aa                  _tpstate
+                  0x0034f8                  _main
+                  0x003a96                  _main_page
+                  0x0026f2                  _mypow
+                  0x00336e                  _point
+                  0x002042                  _showhanzi
+                  0x00274c                  _spistar
+                  0x00273e                  _tpstate
                   0x000604                  _utoa
 
 Memory Configuration
@@ -569,7 +581,7 @@ __FUID3
                   0x000014          0x4 LONG 0x2b6 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x2b6 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x2b6 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x3b02 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x3e5e DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x2b6 DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x2b6 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x2b6 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -577,8 +589,8 @@ __FUID3
                   0x000024          0x4 LONG 0x2b6 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000026          0x4 LONG 0x2b6 DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x2b6 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002a          0x4 LONG 0x39d6 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002c          0x4 LONG 0x39c2 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002a          0x4 LONG 0x3c70 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002c          0x4 LONG 0x3c5c DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002e          0x4 LONG 0x2b6 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000030          0x4 LONG 0x2b6 DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000032          0x4 LONG 0x2b6 DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
@@ -697,7 +709,7 @@ __FUID3
                   0x000114          0x4 LONG 0x2b6 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x2b6 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x2b6 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x3b02 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x3e5e DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x2b6 DEFINED (__AltDMA0Interrupt)?ABSOLUTE (__AltDMA0Interrupt):DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x2b6 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x2b6 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -705,8 +717,8 @@ __FUID3
                   0x000124          0x4 LONG 0x2b6 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000126          0x4 LONG 0x2b6 DEFINED (__AltSPI1ErrInterrupt)?ABSOLUTE (__AltSPI1ErrInterrupt):DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000128          0x4 LONG 0x2b6 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012a          0x4 LONG 0x39d6 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012c          0x4 LONG 0x39c2 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012a          0x4 LONG 0x3c70 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012c          0x4 LONG 0x3c5c DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00012e          0x4 LONG 0x2b6 DEFINED (__AltADC1Interrupt)?ABSOLUTE (__AltADC1Interrupt):DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000130          0x4 LONG 0x2b6 DEFINED (__AltDMA1Interrupt)?ABSOLUTE (__AltDMA1Interrupt):DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000132          0x4 LONG 0x2b6 DEFINED (__AltInterrupt15)?ABSOLUTE (__AltInterrupt15):DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
@@ -1990,91 +2002,99 @@ __c30_signature
                     0x0872                  temp_out
                     0x0874                  ADCPtr
 
-.ndata              0x0876          0x2
- .ndata             0x0876          0x2 main.o
+.ndata              0x0876          0x4
+ .ndata             0x0876          0x4 main.o
                     0x0876                  mode
+                    0x0878                  temp_mode
 
-.nbss               0x0878          0x4
- .nbss              0x0878          0x2 UART.o
-                    0x0878                  tempRX
- .nbss              0x087a          0x2 Timer1.o
-                    0x087a                  Cycle1
+.nbss               0x087a          0x4
+ .nbss              0x087a          0x2 UART.o
+                    0x087a                  tempRX
+ .nbss              0x087c          0x2 Timer1.o
+                    0x087c                  Cycle1
 
-.const              0x8654       0x15ca load address 0x000654  
+.const              0x8654       0x175e load address 0x000654  
  .const             0x8654       0x13dc LCD.o
                     0x86bf                  image
                     0x933f                  hanzi
                     0x943f                  asc2_1608
- .const             0x9a30        0x1ee main.o
+ .const             0x9a30        0x2a4 main.o
+ .const             0x9cd4         0xde Wifi.o
 
-.text             0x001c1e       0x2018
- .text            0x001c1e       0x1746 LCD.o
-                  0x001c1e                  LCD_Init
-                  0x001db4                  LCD_Clear
-                  0x001df2                  LCD_Writ_Bus
-                  0x001dfe                  LCD_WR_DATA
-                  0x001e1a                  LCD_WR_DATA8
-                  0x001e28                  LCD_WR_REG
-                  0x001e36                  LCD_WR_REG_DATA
-                  0x001e4c                  Address_set
-                  0x001eae                  showhanzi
-                  0x001f24                  LCD_DrawPoint
-                  0x001f3e                  LCD_DrawPoint_big
-                  0x001f60                  LCD_DrawLine
-                  0x00203e                  LCD_DrawRectangle
-                  0x002074                  LCD_DrawCircle
-                  0x00217c                  LCD_SquareButton
-                  0x0022a8                  LCD_Fill
-                  0x0022ea                  LCD_ShowChar
-                  0x002404                  LCD_ShowNum
-                  0x0024a6                  LCD_Show2Num
-                  0x00250a                  LCD_ShowString
-                  0x00255e                  mypow
-                  0x0025aa                  tpstate
-                  0x0025b8                  spistar
-                  0x0025c6                  WriteCharTo7843
-                  0x00260e                  ReadFromCharFrom7843
-                  0x002654                  ADS_Read_AD
-                  0x002682                  ADS_Read_XY
-                  0x002738                  Read_ADS
-                  0x002774                  Read_ADS2
-                  0x002816                  Read_TP_Once
-                  0x002866                  Draw_Touch_Point
-                  0x0028c4                  Convert_Pos
-                  0x0029ba                  Touch_Adjust
-                  0x0031da                  point
-                  0x003264                  Touch_SquareDetect
- .text            0x003364        0x5a4 main.o
-                  0x003364                  main
-                  0x0034ce                  LCD_Show
-                  0x003544                  PassKey
-                  0x0036d6                  KeyPress
-                  0x0037dc                  KeyDisplay
- .text            0x003908         0xe6 UART.o
-                  0x003908                  UART1_Init
-                  0x003966                  WriteUART1
-                  0x00398e                  WriteUART1dec2string
-                  0x0039a4                  WriteStringUART1
-                  0x0039c2                  _U1TXInterrupt
-                  0x0039d6                  _U1RXInterrupt
- .text            0x0039ee         0xe6 ADC.o
-                  0x0039ee                  ADC_Init
-                  0x003a56                  ADC_Convert
- .text            0x003ad4         0x84 Timer1.o
-                  0x003ad4                  Timer1_Init
-                  0x003b02                  _T1Interrupt
-                  0x003b28                  LED_Blinking
- .text            0x003b58         0x76 SPI.o
-                  0x003b58                  PPS_Unlock
-                  0x003b60                  PPS_Lock
-                  0x003b68                  SPI1_Init
-                  0x003ba6                  SPI1_SendReceiveData8
- .text            0x003bce         0x68 IOCon.o
-                  0x003bce                  IO_Init
+.text             0x001db2       0x21e0
+ .text            0x001db2       0x1746 LCD.o
+                  0x001db2                  LCD_Init
+                  0x001f48                  LCD_Clear
+                  0x001f86                  LCD_Writ_Bus
+                  0x001f92                  LCD_WR_DATA
+                  0x001fae                  LCD_WR_DATA8
+                  0x001fbc                  LCD_WR_REG
+                  0x001fca                  LCD_WR_REG_DATA
+                  0x001fe0                  Address_set
+                  0x002042                  showhanzi
+                  0x0020b8                  LCD_DrawPoint
+                  0x0020d2                  LCD_DrawPoint_big
+                  0x0020f4                  LCD_DrawLine
+                  0x0021d2                  LCD_DrawRectangle
+                  0x002208                  LCD_DrawCircle
+                  0x002310                  LCD_SquareButton
+                  0x00243c                  LCD_Fill
+                  0x00247e                  LCD_ShowChar
+                  0x002598                  LCD_ShowNum
+                  0x00263a                  LCD_Show2Num
+                  0x00269e                  LCD_ShowString
+                  0x0026f2                  mypow
+                  0x00273e                  tpstate
+                  0x00274c                  spistar
+                  0x00275a                  WriteCharTo7843
+                  0x0027a2                  ReadFromCharFrom7843
+                  0x0027e8                  ADS_Read_AD
+                  0x002816                  ADS_Read_XY
+                  0x0028cc                  Read_ADS
+                  0x002908                  Read_ADS2
+                  0x0029aa                  Read_TP_Once
+                  0x0029fa                  Draw_Touch_Point
+                  0x002a58                  Convert_Pos
+                  0x002b4e                  Touch_Adjust
+                  0x00336e                  point
+                  0x0033f8                  Touch_SquareDetect
+ .text            0x0034f8        0x6aa main.o
+                  0x0034f8                  main
+                  0x0035f2                  LCD_Show
+                  0x00366c                  PassKey
+                  0x00387c                  KeyPress
+                  0x003982                  KeyDisplay
+                  0x003a96                  main_page
+ .text            0x003ba2         0xe6 UART.o
+                  0x003ba2                  UART1_Init
+                  0x003c00                  WriteUART1
+                  0x003c28                  WriteUART1dec2string
+                  0x003c3e                  WriteStringUART1
+                  0x003c5c                  _U1TXInterrupt
+                  0x003c70                  _U1RXInterrupt
+ .text            0x003c88         0xe6 ADC.o
+                  0x003c88                  ADC_Init
+                  0x003cf0                  ADC_Convert
+ .text            0x003d6e         0xc2 Wifi.o
+                  0x003d6e                  WifiReset
+                  0x003d7e                  ConnectAP
+                  0x003d98                  TCPServer
+                  0x003db2                  StartConnect
+ .text            0x003e30         0x84 Timer1.o
+                  0x003e30                  Timer1_Init
+                  0x003e5e                  _T1Interrupt
+                  0x003e84                  LED_Blinking
+ .text            0x003eb4         0x76 SPI.o
+                  0x003eb4                  PPS_Unlock
+                  0x003ebc                  PPS_Lock
+                  0x003ec4                  SPI1_Init
+                  0x003f02                  SPI1_SendReceiveData8
+ .text            0x003f2a         0x68 IOCon.o
+                  0x003f2a                  IO_Init
 
-.dinit            0x003c36         0x34
- .dinit           0x003c36         0x34 data_init
+.dinit            0x003f92         0x36
+ .dinit           0x003f92         0x36 data_init
 
-.text             0x003c6a         0x22
- .text            0x003c6a         0x22 System.o
-                  0x003c6a                  MCU_Init
+.text             0x003fc8         0x22
+ .text            0x003fc8         0x22 System.o
+                  0x003fc8                  MCU_Init

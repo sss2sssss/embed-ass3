@@ -19,10 +19,12 @@ void LCD_Show(void);
 void PassKey(void);
 char KeyPress(void);
 void KeyDisplay(char key);
+void main_page(void);
 
 int mode=1;
 int key_count=0;
 int i;
+int temp_mode=1;
 char key_buffer[4];
 char current_key;
 
@@ -56,73 +58,54 @@ int main()
 				PassKey();
 				break;
 			case 3:
-				WriteStringUART1("AT+RST\r\n");
-				__delay_ms(10000);
-				mode=4;
+				main_page();
+				break;
 			case 4:
-				WriteStringUART1("AT+CWMODE=1\r\n");
-				__delay_ms(10000);
-				mode=5;
+				LCD_ShowString(10,150,"Resetting WiFi Module...");
+				WifiReset();
+				LCD_Clear(WHITE);
+				BACK_COLOR = WHITE;
+				POINT_COLOR = BLACK;
+				mode=3;
 				break;
 			case 5:
-				WriteStringUART1("AT+CWJAP=\"wifi_zombie\",\"sls930622\"\r\n");
-				__delay_ms(10000);
-				mode=6;
+				LCD_ShowString(10,130,"Connecting Access point...");
+				ConnectAP();
+				LCD_ShowString(10,150,"Setting up TCP server...");
+				TCPServer();
+				LCD_Clear(WHITE);
+				BACK_COLOR = WHITE;
+				POINT_COLOR = BLACK;
+				mode=3;
 				break;
 			case 6:
-				WriteStringUART1("AT+CIPMUX=1\r\n");
-				__delay_ms(10000);
-				mode=7;
-				break;
-			case 7:
-				WriteStringUART1("AT+CIPSERVER=1,8713\r\n");
-				__delay_ms(10000);
-				mode=8;
-				break;
-			case 8:
-				ADC_Convert();
-				if(temp_out<18)
+				if(temp_mode==1)
 				{
-					WriteStringUART1("AT+CIPSEND=0,30\r\n");
-					__delay_ms(5000);
-					WriteStringUART1("Now is ");
-					WriteUART1dec2string(temp_out);
-					WriteStringUART1(" degree celcuis. Cold");
-					__delay_ms(10000);
-					__delay_ms(10000);
-					__delay_ms(10000);
+					LCD_ShowString(10,100,"Current temperature");
+					LCD_ShowString(10,120,"in degree celsius:");
+					LCD_ShowString(10,150,"N.A.");
+					StartConnect();
+					temp_mode=2;
+					//mode=8;
 				}
-				else if(temp_out>=18 && temp_out<=24)
+				if(temp_mode==2)
 				{
-					WriteStringUART1("AT+CIPSEND=0,32\r\n");
-					__delay_ms(5000);
-					WriteStringUART1("Now is ");
-					WriteUART1dec2string(temp_out);
-					WriteStringUART1(" degree celcuis. Normal");
-					__delay_ms(10000);
-					__delay_ms(10000);
-					__delay_ms(10000);
+					LCD_ShowString(10,100,"Current temperature");
+					LCD_ShowString(10,120,"in degree celsius:");
+					LCD_ShowNum(10,150,temp_out,2);
+					StartConnect();
+					//mode=8;
 				}
-				else if(temp_out>24)
-				{
-					WriteStringUART1("AT+CIPSEND=0,29\r\n");
-					__delay_ms(5000);
-					WriteStringUART1("Now is ");
-					WriteUART1dec2string(temp_out);
-					WriteStringUART1(" degree celcuis. Hot");
-					__delay_ms(10000);
-					__delay_ms(10000);
-					__delay_ms(10000);
-				}
-				mode=9;
 				break;
-			case 9:
+			/*case 8:
 				WriteStringUART1("AT+CIPCLOSE=0\r\n");
 				__delay_ms(10000);
-				__delay_ms(10000);
-				__delay_ms(10000);
-				mode=8;
-				break;
+				LCD_Clear(WHITE);
+				BACK_COLOR = WHITE;
+				POINT_COLOR = BLACK;
+				temp_mode=2;
+				mode=6;
+				break;*/
 		}
 	}
 }
@@ -142,12 +125,31 @@ void LCD_Show(void)
 	{
     	LCD_Clear(YELLOW);
 		BACK_COLOR = YELLOW;
+		POINT_COLOR = BLACK;
 		mode=2;
 	}
 }
 
 void PassKey(void)
 {
+    LCD_ShowString(0,0,"Press four number password");
+	LCD_ShowString(0,20,"to access.");
+	if(key_count==1)
+	{
+		LCD_ShowString(0,40,"First key is pressed.");
+	}
+	else if(key_count==2)
+	{
+		LCD_ShowString(0,40,"Second key is pressed.");
+	}
+	else if(key_count==3)
+	{
+		LCD_ShowString(0,40,"Third key is pressed.");
+	}
+	else if(key_count>3)
+	{
+		LCD_ShowString(0,40,"Forth key is pressed.");
+	}
 	LCD_SquareButton(0,79,80,"1",BLACK,36,115);
     LCD_SquareButton(80,79,80,"2",BLACK,116,115);
     LCD_SquareButton(160,79,80,"3",BLACK,196,115);
@@ -165,7 +167,7 @@ void PassKey(void)
 			current_key=KeyPress();
 			__delay_ms(500);
 			KeyDisplay(current_key);
-			__delay_ms(1000);
+			__delay_ms(1500);
 			key_count++;
 			LCD_Clear(YELLOW);
 			BACK_COLOR = YELLOW;
@@ -175,12 +177,15 @@ void PassKey(void)
 	{
 		if(key_buffer[0]=='1'&&key_buffer[1]=='2'&&key_buffer[2]=='3'&&key_buffer[3]=='4')
 		{
-			LCD_Clear(WHITE);
-			BACK_COLOR = WHITE;
-			LCD_ShowString(88,10,"Success");
+    		LCD_Clear(YELLOW);
+			BACK_COLOR = YELLOW;
+        	POINT_COLOR = BLACK;
+			LCD_ShowString(80,100,"Success!");
+			LCD_ShowString(80,120,"Welcome!");
 			__delay_ms(2000);
 			LCD_Clear(WHITE);
 			BACK_COLOR = WHITE;
+			POINT_COLOR = BLACK;
 			for(i=0;i<4;i++)
 			{
 				key_buffer[i]='\0';
@@ -190,12 +195,15 @@ void PassKey(void)
 		}
 		else
 		{
-			LCD_Clear(WHITE);
-			BACK_COLOR = WHITE;
-			LCD_ShowString(88,10,"Fail");
+    		LCD_Clear(YELLOW);
+			BACK_COLOR = YELLOW;
+			POINT_COLOR = BLACK;
+			LCD_ShowString(88,100,"Fail.");
+			LCD_ShowString(50,120,"Please try again.");
 			__delay_ms(2000);
 			LCD_Clear(YELLOW);
 			BACK_COLOR = YELLOW;
+			POINT_COLOR = BLACK;
 			for(i=0;i<4;i++)
 			{
 				key_buffer[i]='\0';
@@ -261,92 +269,122 @@ char KeyPress(void)
 		key_buffer[key_count] = '9';
 		return 9;
     }
-    
-    else
-    {
-        return 0;
-    }
 }
 
 void KeyDisplay(char key)
 {
     if (key == 1)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 1 is pressed");
+        LCD_ShowString(10,150,"Key 1 is pressed.");
     }
     
     else if (key == 2)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 2 is pressed");
+        LCD_ShowString(10,150,"Key 2 is pressed.");
     }
     
     else if (key == 3)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 3 is pressed");
+        LCD_ShowString(10,150,"Key 3 is pressed.");
     }
     
     else if (key == 4)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 4 is pressed");
+        LCD_ShowString(10,150,"Key 4 is pressed.");
     }
     
     else if (key == 5)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 5 is pressed");
+        LCD_ShowString(10,150,"Key 5 is pressed.");
     }
     
     else if (key == 6)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 6 is pressed");
+        LCD_ShowString(10,150,"Key 6 is pressed.");
     }
     
     else if (key == 7)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 7 is pressed");
+        LCD_ShowString(10,150,"Key 7 is pressed.");
     }
     
     else if (key == 8)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 8 is pressed");
+        LCD_ShowString(10,150,"Key 8 is pressed.");
     }
     
     else if (key == 9)
     {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"Key 9 is pressed");
+        LCD_ShowString(10,150,"Key 9 is pressed.");
     }
-    
-    else
-    {
-        LCD_Clear(WHITE);
-        BACK_COLOR = WHITE;
+}
+
+void main_page(void)
+{
+	LCD_ShowString(50,0,"Control Panel");
+	LCD_ShowString(50,20,"Poultry Farm");
+	LCD_ShowString(20,50,"Advise to do reset first");
+	LCD_ShowString(30,70,"for the WiFi module.");
+	LCD_ShowString(20,90,"Reset->Connect->Start");
+	LCD_ShowString(30,110,"Press Lock to go back");
+	LCD_ShowString(60,130,"lockscreen.");
+    LCD_SquareButton(0,159,80,"Reset",BLACK,20,195);
+    LCD_SquareButton(80,159,80,"Connect",BLACK,95,195);
+    LCD_SquareButton(160,159,80,"Start",BLACK,180,195);
+    LCD_SquareButton(80,239,80,"Lock",BLACK,100,275);
+	if(Touch_SquareDetect(0,159,80))
+	{
+		LCD_Clear(WHITE);
+		BACK_COLOR = WHITE;
+		POINT_COLOR = BLACK;
+		mode=4;
+	}
+	if(Touch_SquareDetect(80,159,80))
+	{
+		LCD_Clear(WHITE);
+		BACK_COLOR = WHITE;
+		POINT_COLOR = BLACK;
+		mode=5;
+	}
+	if(Touch_SquareDetect(160,159,80))
+	{
+		LCD_Clear(WHITE);
+		BACK_COLOR = WHITE;
+		POINT_COLOR = BLACK;
+		mode=6;
+	}
+	if(Touch_SquareDetect(80,239,80))
+	{
+    	LCD_Clear(YELLOW);
+		BACK_COLOR = YELLOW;
         POINT_COLOR = BLACK;
-        LCD_ShowString(10,50,"No Key is pressed");
-    }
+		mode=2;
+	}
 }
