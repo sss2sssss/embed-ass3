@@ -1,11 +1,8 @@
-#define FOSC    (7370000ULL)
-#define FCY     (FOSC/2)
-
 #include <xc.h>
+#include "Param.h"
 #include <libpic30.h>
+#include <stdlib.h>
 #include "UART.h"
-#include "IOCon.h"
-
 
 int tempRX;
 
@@ -14,7 +11,7 @@ void UART1_Init()
 	//U1BRG Baud rate
 	U1BRG				= 23;			//9600 
 	
-	U1MODEbits.UARTEN	= 0;			//Disable UART
+	UART_OFF;							//Disable UART
 	U1MODEbits.USIDL	= 0;			//Continue module operation in Idle mode
 	U1MODEbits.IREN		= 0;			//IrDA encoder and decoder disabled
 	U1MODEbits.RTSMD	= 0;			//UxRTS pin in Flow Control mode
@@ -37,17 +34,13 @@ void UART1_Init()
 	U1STAbits.ADDEN		= 0;			//Address Detect mode disabled
 	
 	//UART1 Interrupt Priority Configuration
-	IPC3bits.U1TXIP		= 7;			//UART1 Transmitter Interrupt Priority bits
+	IPC3bits.U1TXIP		= 0b010;		//UART1 Transmitter Interrupt Priority bits
 	IEC0bits.U1TXIE		= 1;			//UART1 Transmitter Interrupt Enable bit
 	IFS0bits.U1TXIF		= 0;			//Clear UART1 Transmitter Interrupt
 	
-	IPC2bits.U1RXIP		= 7;			//UART1 Receiver Interrupt Priority bits
+	IPC2bits.U1RXIP		= 0b010;		//UART1 Receiver Interrupt Priority bits
 	IEC0bits.U1RXIE		= 1;			//UART1 Receiver Interrupt Enable bit
 	IFS0bits.U1RXIF		= 0;			//Clear UART1 Receiver Interrupt
-	
-	U1MODEbits.UARTEN	= 1;			//Enable UART
-	U1STAbits.UTXEN		= 1;			//Transmit enabled, UxTX pin controlled by UARTx
-
 }
 
 
@@ -61,17 +54,9 @@ void WriteUART1(unsigned int data)
 }
 void WriteUART1dec2string(unsigned int data)
 {
-    unsigned char temp;
-    temp=data/1000;
-    WriteUART1(temp+'0');
-    data=data-temp*1000;
-    temp=data/100;
-    WriteUART1(temp+'0');
-    data=data-temp*100;
-    temp=data/10;
-    WriteUART1(temp+'0');
-    data=data-temp*10;
-    WriteUART1(data+'0');
+	char buffer [3];
+	itoa(buffer,data,10);
+	WriteStringUART1(buffer);
 }
 void WriteStringUART1(const char * s)
 {

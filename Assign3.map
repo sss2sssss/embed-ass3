@@ -27,6 +27,9 @@ Command:
   UART.o \
   Wifi.o \
   ADC.o \
+  Timer1.o \
+  LCD.o \
+  SPI.o \
   -LC:\Program Files (x86)\Microchip\xc16\v1.24\lib \
   -Tp33FJ128MC802.gld.00 \
   --defsym=__MPLAB_BUILD=1 \
@@ -57,6 +60,16 @@ c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(mulsf3
                               ADC.o (__mulsf3)
 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
                               ADC.o (__fixunssfsi)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+                              LCD.o (__udivsi3)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(umodsi3.o)
+                              LCD.o (__umodsi3)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(addsf3.o)
+                              LCD.o (__subsf3)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fgtge.o)
+                              LCD.o (__gtsf2)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(feqltle.o)
+                              LCD.o (__ltsf2)
 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatundisf.o)
                               c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatunsisf.o) (__floatundisf)
 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack2.o)
@@ -67,18 +80,23 @@ c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fpack.
                               c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(divsf3.o) (_fpack)
 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack.o)
                               c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fixunssfsi.o) (_funpack)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fcompare.o)
+                              c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fgtge.o) (_fcompare)
+c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libc-coff.a(itoa.o)
+                              UART.o (itoa)
 
 
 Program Memory  [Origin = 0x200, Length = 0x15600]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x2e4           0x456  (1110)
-.const                       0x4e4                0x3c            0x5a  (90)
-.text                        0x520               0x2cc           0x432  (1074)
-.dinit                       0x7ec                0x16            0x21  (33)
+.text                        0x200               0x454           0x67e  (1662)
+.const                       0x654              0x15ca          0x20af  (8367)
+.text                       0x1c1e              0x2018          0x3024  (12324)
+.dinit                      0x3c36                0x34            0x4e  (78)
+.text                       0x3c6a                0x22            0x33  (51)
 
-                     Total program memory used (bytes):          0x903  (2307) 1%
+                     Total program memory used (bytes):         0x57d2  (22482) 17%
 
 
 Data Memory  [Origin = 0x800, Length = 0x4000]
@@ -86,11 +104,13 @@ Data Memory  [Origin = 0x800, Length = 0x4000]
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .icd                         0x800                0x50            0x50  (80)
-.nbss                        0x850                   0             0x6  (6)
-.ndata                       0x856                   0             0x2  (2)
-.nbss                        0x858                   0             0x2  (2)
+.nbss                        0x850                   0            0x18  (24)
+.ndata                       0x868                   0             0x8  (8)
+.nbss                        0x870                   0             0x6  (6)
+.ndata                       0x876                   0             0x2  (2)
+.nbss                        0x878                   0             0x4  (4)
 
-                        Total data memory used (bytes):           0x5a  (90) <1%
+                        Total data memory used (bytes):           0x7c  (124) <1%
 
 
 Dynamic Memory Usage
@@ -98,90 +118,238 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x85a                              0x3fa6  (16294)
+stack                        0x87c                              0x3f84  (16260)
 
-                        Maximum dynamic memory (bytes):         0x3fa6  (16294)
+                        Maximum dynamic memory (bytes):         0x3f84  (16260)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0850                  _ADCValue
-                    0x0852                  _temp_out
-                    0x0854                  _ADCPtr
-                    0x0856                  _mode
-                    0x0858                  _tempRX
+                    0x0850                  _BACK_COLOR
+                    0x0852                  _POINT_COLOR
+                    0x0854                  _bitdata
+                    0x0856                  _tp_pixad
+                    0x085a                  _tp_pixlcd
+                    0x085e                  _key_count
+                    0x0860                  _i
+                    0x0862                  _key_buffer
+                    0x0866                  _current_key
+                    0x0868                  _vx
+                    0x086a                  _vy
+                    0x086c                  _chx
+                    0x086e                  _chy
+                    0x0870                  _ADCValue
+                    0x0872                  _temp_out
+                    0x0874                  _ADCPtr
+                    0x0876                  _mode
+                    0x0878                  _tempRX
+                    0x087a                  _Cycle1
 
 External Symbols in Data Memory (by name):
 
-                    0x0854                  _ADCPtr
-                    0x0850                  _ADCValue
-                    0x0856                  _mode
-                    0x0858                  _tempRX
-                    0x0852                  _temp_out
+                    0x0874                  _ADCPtr
+                    0x0870                  _ADCValue
+                    0x0850                  _BACK_COLOR
+                    0x087a                  _Cycle1
+                    0x0852                  _POINT_COLOR
+                    0x0854                  _bitdata
+                    0x086c                  _chx
+                    0x086e                  _chy
+                    0x0866                  _current_key
+                    0x0860                  _i
+                    0x0862                  _key_buffer
+                    0x085e                  _key_count
+                    0x0876                  _mode
+                    0x0878                  _tempRX
+                    0x0872                  _temp_out
+                    0x0856                  _tp_pixad
+                    0x085a                  _tp_pixlcd
+                    0x0868                  _vx
+                    0x086a                  _vy
 
 External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00022c                  __psv_init
                   0x00023c                  ___delay32
-                  0x000258                  __data_init
                   0x000258                  __data_init_standard
+                  0x000258                  __data_init
                   0x0002b6                  __DefaultInterrupt
                   0x0002ba                  ___floatunsisf
                   0x0002be                  ___divsf3
                   0x000342                  ___mulsf3
                   0x0003aa                  ___fixunssfsi
-                  0x0003e0                  ___floatundisf
-                  0x00043e                  __funpack2
-                  0x00044e                  __fPropagateNaN
-                  0x000460                  __fbopExit
-                  0x000468                  __fbopReturnNaN
-                  0x00046e                  __fpack
-                  0x0004ba                  __funpack
-                  0x000520                  _UART1_Init
-                  0x000582                  _WriteUART1
-                  0x0005aa                  _WriteUART1dec2string
-                  0x00062c                  _WriteStringUART1
-                  0x00064a                  __U1TXInterrupt
-                  0x00065e                  __U1RXInterrupt
-                  0x000676                  _ADC_Init
-                  0x0006ec                  _ADC_Convert
-                  0x000728                  __ADC1Interrupt
-                  0x00073c                  _main
-                  0x0007a8                  _IO_Init
-                  0x0007ca                  _MCU_Init
+                  0x0003e0                  ___udivsi3
+                  0x000400                  ___umodsi3
+                  0x000406                  ___subsf3
+                  0x000408                  ___addsf3
+                  0x0004c2                  ___gtsf2
+                  0x0004c2                  ___gesf2
+                  0x0004c6                  ___eqsf2
+                  0x0004c6                  ___ltsf2
+                  0x0004c6                  ___lesf2
+                  0x0004ca                  ___floatundisf
+                  0x000528                  __funpack2
+                  0x000538                  __fPropagateNaN
+                  0x00054a                  __fbopExit
+                  0x000552                  __fbopReturnNaN
+                  0x000558                  __fpack
+                  0x0005a4                  __funpack
+                  0x0005ce                  __fcompare
+                  0x000604                  _utoa
+                  0x000638                  _itoa
+                  0x0006bf                  _image
+                  0x00133f                  _hanzi
+                  0x00143f                  _asc2_1608
+                  0x001c1e                  _LCD_Init
+                  0x001db4                  _LCD_Clear
+                  0x001df2                  _LCD_Writ_Bus
+                  0x001dfe                  _LCD_WR_DATA
+                  0x001e1a                  _LCD_WR_DATA8
+                  0x001e28                  _LCD_WR_REG
+                  0x001e36                  _LCD_WR_REG_DATA
+                  0x001e4c                  _Address_set
+                  0x001eae                  _showhanzi
+                  0x001f24                  _LCD_DrawPoint
+                  0x001f3e                  _LCD_DrawPoint_big
+                  0x001f60                  _LCD_DrawLine
+                  0x00203e                  _LCD_DrawRectangle
+                  0x002074                  _LCD_DrawCircle
+                  0x00217c                  _LCD_SquareButton
+                  0x0022a8                  _LCD_Fill
+                  0x0022ea                  _LCD_ShowChar
+                  0x002404                  _LCD_ShowNum
+                  0x0024a6                  _LCD_Show2Num
+                  0x00250a                  _LCD_ShowString
+                  0x00255e                  _mypow
+                  0x0025aa                  _tpstate
+                  0x0025b8                  _spistar
+                  0x0025c6                  _WriteCharTo7843
+                  0x00260e                  _ReadFromCharFrom7843
+                  0x002654                  _ADS_Read_AD
+                  0x002682                  _ADS_Read_XY
+                  0x002738                  _Read_ADS
+                  0x002774                  _Read_ADS2
+                  0x002816                  _Read_TP_Once
+                  0x002866                  _Draw_Touch_Point
+                  0x0028c4                  _Convert_Pos
+                  0x0029ba                  _Touch_Adjust
+                  0x0031da                  _point
+                  0x003264                  _Touch_SquareDetect
+                  0x003364                  _main
+                  0x0034ce                  _LCD_Show
+                  0x003544                  _PassKey
+                  0x0036d6                  _KeyPress
+                  0x0037dc                  _KeyDisplay
+                  0x003908                  _UART1_Init
+                  0x003966                  _WriteUART1
+                  0x00398e                  _WriteUART1dec2string
+                  0x0039a4                  _WriteStringUART1
+                  0x0039c2                  __U1TXInterrupt
+                  0x0039d6                  __U1RXInterrupt
+                  0x0039ee                  _ADC_Init
+                  0x003a56                  _ADC_Convert
+                  0x003ad4                  _Timer1_Init
+                  0x003b02                  __T1Interrupt
+                  0x003b28                  _LED_Blinking
+                  0x003b58                  _PPS_Unlock
+                  0x003b60                  _PPS_Lock
+                  0x003b68                  _SPI1_Init
+                  0x003ba6                  _SPI1_SendReceiveData8
+                  0x003bce                  _IO_Init
+                  0x003c6a                  _MCU_Init
 
 External Symbols in Program Memory (by name):
 
-                  0x0006ec                  _ADC_Convert
-                  0x000676                  _ADC_Init
-                  0x0007a8                  _IO_Init
-                  0x0007ca                  _MCU_Init
-                  0x000520                  _UART1_Init
-                  0x00062c                  _WriteStringUART1
-                  0x000582                  _WriteUART1
-                  0x0005aa                  _WriteUART1dec2string
-                  0x000728                  __ADC1Interrupt
+                  0x003a56                  _ADC_Convert
+                  0x0039ee                  _ADC_Init
+                  0x002654                  _ADS_Read_AD
+                  0x002682                  _ADS_Read_XY
+                  0x001e4c                  _Address_set
+                  0x0028c4                  _Convert_Pos
+                  0x002866                  _Draw_Touch_Point
+                  0x003bce                  _IO_Init
+                  0x0037dc                  _KeyDisplay
+                  0x0036d6                  _KeyPress
+                  0x001db4                  _LCD_Clear
+                  0x002074                  _LCD_DrawCircle
+                  0x001f60                  _LCD_DrawLine
+                  0x001f24                  _LCD_DrawPoint
+                  0x001f3e                  _LCD_DrawPoint_big
+                  0x00203e                  _LCD_DrawRectangle
+                  0x0022a8                  _LCD_Fill
+                  0x001c1e                  _LCD_Init
+                  0x0034ce                  _LCD_Show
+                  0x0024a6                  _LCD_Show2Num
+                  0x0022ea                  _LCD_ShowChar
+                  0x002404                  _LCD_ShowNum
+                  0x00250a                  _LCD_ShowString
+                  0x00217c                  _LCD_SquareButton
+                  0x001dfe                  _LCD_WR_DATA
+                  0x001e1a                  _LCD_WR_DATA8
+                  0x001e28                  _LCD_WR_REG
+                  0x001e36                  _LCD_WR_REG_DATA
+                  0x001df2                  _LCD_Writ_Bus
+                  0x003b28                  _LED_Blinking
+                  0x003c6a                  _MCU_Init
+                  0x003b60                  _PPS_Lock
+                  0x003b58                  _PPS_Unlock
+                  0x003544                  _PassKey
+                  0x00260e                  _ReadFromCharFrom7843
+                  0x002738                  _Read_ADS
+                  0x002774                  _Read_ADS2
+                  0x002816                  _Read_TP_Once
+                  0x003b68                  _SPI1_Init
+                  0x003ba6                  _SPI1_SendReceiveData8
+                  0x003ad4                  _Timer1_Init
+                  0x0029ba                  _Touch_Adjust
+                  0x003264                  _Touch_SquareDetect
+                  0x003908                  _UART1_Init
+                  0x0025c6                  _WriteCharTo7843
+                  0x0039a4                  _WriteStringUART1
+                  0x003966                  _WriteUART1
+                  0x00398e                  _WriteUART1dec2string
                   0x0002b6                  __DefaultInterrupt
-                  0x00065e                  __U1RXInterrupt
-                  0x00064a                  __U1TXInterrupt
+                  0x003b02                  __T1Interrupt
+                  0x0039d6                  __U1RXInterrupt
+                  0x0039c2                  __U1TXInterrupt
+                  0x000408                  ___addsf3
                   0x00023c                  ___delay32
                   0x0002be                  ___divsf3
+                  0x0004c6                  ___eqsf2
                   0x0003aa                  ___fixunssfsi
-                  0x0003e0                  ___floatundisf
+                  0x0004ca                  ___floatundisf
                   0x0002ba                  ___floatunsisf
+                  0x0004c2                  ___gesf2
+                  0x0004c2                  ___gtsf2
+                  0x0004c6                  ___lesf2
+                  0x0004c6                  ___ltsf2
                   0x000342                  ___mulsf3
+                  0x000406                  ___subsf3
+                  0x0003e0                  ___udivsi3
+                  0x000400                  ___umodsi3
                   0x000258                  __data_init
                   0x000258                  __data_init_standard
-                  0x00044e                  __fPropagateNaN
-                  0x000460                  __fbopExit
-                  0x000468                  __fbopReturnNaN
-                  0x00046e                  __fpack
-                  0x0004ba                  __funpack
-                  0x00043e                  __funpack2
+                  0x000538                  __fPropagateNaN
+                  0x00054a                  __fbopExit
+                  0x000552                  __fbopReturnNaN
+                  0x0005ce                  __fcompare
+                  0x000558                  __fpack
+                  0x0005a4                  __funpack
+                  0x000528                  __funpack2
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00073c                  _main
+                  0x00143f                  _asc2_1608
+                  0x00133f                  _hanzi
+                  0x0006bf                  _image
+                  0x000638                  _itoa
+                  0x003364                  _main
+                  0x00255e                  _mypow
+                  0x0031da                  _point
+                  0x001eae                  _showhanzi
+                  0x0025b8                  _spistar
+                  0x0025aa                  _tpstate
+                  0x000604                  _utoa
 
 Memory Configuration
 
@@ -214,6 +382,9 @@ LOAD System.o
 LOAD UART.o
 LOAD Wifi.o
 LOAD ADC.o
+LOAD Timer1.o
+LOAD LCD.o
+LOAD SPI.o
 LOAD c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib/dsPIC33F\libp33FJ128MC802-coff.a
 LOAD c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libfx-coff.a
                     0xf80000                  __FBS = 0xf80000
@@ -244,7 +415,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libfx-coff.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x2e4
+.text             0x000200        0x454
  *(.init)
  .init            0x000200         0x3c c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                   0x000200                  _resetPRI
@@ -270,20 +441,40 @@ LOAD c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libfx-coff.a
                   0x000342                  __mulsf3
  .libm            0x0003aa         0x36 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
                   0x0003aa                  __fixunssfsi
- .libm            0x0003e0         0x5e c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatundisf.o)
-                  0x0003e0                  __floatundisf
- .libm            0x00043e         0x10 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack2.o)
-                  0x00043e                  _funpack2
- .libm            0x00044e         0x20 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(futil.o)
-                  0x00044e                  _fPropagateNaN
-                  0x000460                  _fbopExit
-                  0x000468                  _fbopReturnNaN
- .libm            0x00046e         0x4c c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fpack.o)
-                  0x00046e                  _fpack
- .libm            0x0004ba         0x2a c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack.o)
-                  0x0004ba                  _funpack
+ .libm            0x0003e0         0x20 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+                  0x0003e0                  __udivsi3
+ .libm            0x000400          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(umodsi3.o)
+                  0x000400                  __umodsi3
+ .libm            0x000406         0xbc c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(addsf3.o)
+                  0x000406                  __subsf3
+                  0x000408                  __addsf3
+ .libm            0x0004c2          0x4 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fgtge.o)
+                  0x0004c2                  __gesf2
+                  0x0004c2                  __gtsf2
+ .libm            0x0004c6          0x4 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(feqltle.o)
+                  0x0004c6                  __eqsf2
+                  0x0004c6                  __ltsf2
+                  0x0004c6                  __lesf2
+ .libm            0x0004ca         0x5e c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatundisf.o)
+                  0x0004ca                  __floatundisf
+ .libm            0x000528         0x10 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                  0x000528                  _funpack2
+ .libm            0x000538         0x20 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(futil.o)
+                  0x000538                  _fPropagateNaN
+                  0x00054a                  _fbopExit
+                  0x000552                  _fbopReturnNaN
+ .libm            0x000558         0x4c c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fpack.o)
+                  0x000558                  _fpack
+ .libm            0x0005a4         0x2a c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack.o)
+                  0x0005a4                  _funpack
+ .libm            0x0005ce         0x36 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fcompare.o)
+                  0x0005ce                  _fcompare
  *(.libdsp)
  *(.lib*)
+ .libc.utoa       0x000604         0x34 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libc-coff.a(itoa.o)
+                  0x000604                  utoa
+ .libc.itoa       0x000638         0x1c c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libc-coff.a(itoa.o)
+                  0x000638                  itoa
 
 usercode
  *(usercode)
@@ -378,7 +569,7 @@ __FUID3
                   0x000014          0x4 LONG 0x2b6 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x2b6 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x2b6 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x2b6 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x3b02 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x2b6 DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x2b6 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x2b6 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -386,9 +577,9 @@ __FUID3
                   0x000024          0x4 LONG 0x2b6 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000026          0x4 LONG 0x2b6 DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x2b6 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002a          0x4 LONG 0x65e DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002c          0x4 LONG 0x64a DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002e          0x4 LONG 0x728 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002a          0x4 LONG 0x39d6 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002c          0x4 LONG 0x39c2 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002e          0x4 LONG 0x2b6 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000030          0x4 LONG 0x2b6 DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000032          0x4 LONG 0x2b6 DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
                   0x000034          0x4 LONG 0x2b6 DEFINED (__SI2C1Interrupt)?ABSOLUTE (__SI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -506,7 +697,7 @@ __FUID3
                   0x000114          0x4 LONG 0x2b6 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x2b6 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x2b6 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x2b6 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x3b02 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x2b6 DEFINED (__AltDMA0Interrupt)?ABSOLUTE (__AltDMA0Interrupt):DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x2b6 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x2b6 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -514,9 +705,9 @@ __FUID3
                   0x000124          0x4 LONG 0x2b6 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000126          0x4 LONG 0x2b6 DEFINED (__AltSPI1ErrInterrupt)?ABSOLUTE (__AltSPI1ErrInterrupt):DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000128          0x4 LONG 0x2b6 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012a          0x4 LONG 0x65e DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012c          0x4 LONG 0x64a DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012e          0x4 LONG 0x728 DEFINED (__AltADC1Interrupt)?ABSOLUTE (__AltADC1Interrupt):DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012a          0x4 LONG 0x39d6 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012c          0x4 LONG 0x39c2 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012e          0x4 LONG 0x2b6 DEFINED (__AltADC1Interrupt)?ABSOLUTE (__AltADC1Interrupt):DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000130          0x4 LONG 0x2b6 DEFINED (__AltDMA1Interrupt)?ABSOLUTE (__AltDMA1Interrupt):DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000132          0x4 LONG 0x2b6 DEFINED (__AltInterrupt15)?ABSOLUTE (__AltInterrupt15):DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
                   0x000134          0x4 LONG 0x2b6 DEFINED (__AltSI2C1Interrupt)?ABSOLUTE (__AltSI2C1Interrupt):DEFINED (__SI2C1Interrupt)?ABSOLUTE (__SI2C1Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1715,7 +1906,7 @@ LOAD data_init
 LOAD default_isr
 
 __c30_signature
-                  0x000000         0x6c
+                  0x000000         0xa8
  __c30_signature
                   0x000000          0x6 IOCon.o
  __c30_signature
@@ -1729,65 +1920,161 @@ __c30_signature
  __c30_signature
                   0x00001e          0x6 ADC.o
  __c30_signature
-                  0x000024          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
+                  0x000024          0x6 Timer1.o
  __c30_signature
-                  0x00002a          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(delay32.o)
+                  0x00002a          0x6 LCD.o
  __c30_signature
-                  0x000030          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
+                  0x000030          0x6 SPI.o
  __c30_signature
-                  0x000036          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatunsisf.o)
+                  0x000036          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
  __c30_signature
-                  0x00003c          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(divsf3.o)
+                  0x00003c          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(delay32.o)
  __c30_signature
-                  0x000042          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+                  0x000042          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
  __c30_signature
-                  0x000048          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+                  0x000048          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatunsisf.o)
  __c30_signature
-                  0x00004e          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatundisf.o)
+                  0x00004e          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(divsf3.o)
  __c30_signature
-                  0x000054          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                  0x000054          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(mulsf3.o)
  __c30_signature
-                  0x00005a          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(futil.o)
+                  0x00005a          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
  __c30_signature
-                  0x000060          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fpack.o)
+                  0x000060          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(udivsi3.o)
  __c30_signature
-                  0x000066          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack.o)
+                  0x000066          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(umodsi3.o)
+ __c30_signature
+                  0x00006c          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(addsf3.o)
+ __c30_signature
+                  0x000072          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fgtge.o)
+ __c30_signature
+                  0x000078          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(feqltle.o)
+ __c30_signature
+                  0x00007e          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(floatundisf.o)
+ __c30_signature
+                  0x000084          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack2.o)
+ __c30_signature
+                  0x00008a          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(futil.o)
+ __c30_signature
+                  0x000090          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fpack.o)
+ __c30_signature
+                  0x000096          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(funpack.o)
+ __c30_signature
+                  0x00009c          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libm-coff.a(fcompare.o)
+ __c30_signature
+                  0x0000a2          0x6 c:/program files (x86)/microchip/xc16/v1.24/bin/bin/../../lib\libc-coff.a(itoa.o)
 
-.nbss               0x0850          0x6
- .nbss              0x0850          0x6 ADC.o
-                    0x0850                  ADCValue
-                    0x0852                  temp_out
-                    0x0854                  ADCPtr
+.nbss               0x0850         0x18
+ .nbss              0x0850          0xe LCD.o
+                    0x0850                  BACK_COLOR
+                    0x0852                  POINT_COLOR
+                    0x0854                  bitdata
+                    0x0856                  tp_pixad
+                    0x085a                  tp_pixlcd
+ .nbss              0x085e          0xa main.o
+                    0x085e                  key_count
+                    0x0860                  i
+                    0x0862                  key_buffer
+                    0x0866                  current_key
 
-.ndata              0x0856          0x2
- .ndata             0x0856          0x2 main.o
-                    0x0856                  mode
+.ndata              0x0868          0x8
+ .ndata             0x0868          0x8 LCD.o
+                    0x0868                  vx
+                    0x086a                  vy
+                    0x086c                  chx
+                    0x086e                  chy
 
-.nbss               0x0858          0x2
- .nbss              0x0858          0x2 UART.o
-                    0x0858                  tempRX
+.nbss               0x0870          0x6
+ .nbss              0x0870          0x6 ADC.o
+                    0x0870                  ADCValue
+                    0x0872                  temp_out
+                    0x0874                  ADCPtr
 
-.const              0x84e4         0x3c load address 0x0004e4  
- .const             0x84e4         0x3c main.o
+.ndata              0x0876          0x2
+ .ndata             0x0876          0x2 main.o
+                    0x0876                  mode
 
-.text             0x000520        0x2cc
- .text            0x000520        0x156 UART.o
-                  0x000520                  UART1_Init
-                  0x000582                  WriteUART1
-                  0x0005aa                  WriteUART1dec2string
-                  0x00062c                  WriteStringUART1
-                  0x00064a                  _U1TXInterrupt
-                  0x00065e                  _U1RXInterrupt
- .text            0x000676         0xc6 ADC.o
-                  0x000676                  ADC_Init
-                  0x0006ec                  ADC_Convert
-                  0x000728                  _ADC1Interrupt
- .text            0x00073c         0x6c main.o
-                  0x00073c                  main
- .text            0x0007a8         0x22 IOCon.o
-                  0x0007a8                  IO_Init
- .text            0x0007ca         0x22 System.o
-                  0x0007ca                  MCU_Init
+.nbss               0x0878          0x4
+ .nbss              0x0878          0x2 UART.o
+                    0x0878                  tempRX
+ .nbss              0x087a          0x2 Timer1.o
+                    0x087a                  Cycle1
 
-.dinit            0x0007ec         0x16
- .dinit           0x0007ec         0x16 data_init
+.const              0x8654       0x15ca load address 0x000654  
+ .const             0x8654       0x13dc LCD.o
+                    0x86bf                  image
+                    0x933f                  hanzi
+                    0x943f                  asc2_1608
+ .const             0x9a30        0x1ee main.o
+
+.text             0x001c1e       0x2018
+ .text            0x001c1e       0x1746 LCD.o
+                  0x001c1e                  LCD_Init
+                  0x001db4                  LCD_Clear
+                  0x001df2                  LCD_Writ_Bus
+                  0x001dfe                  LCD_WR_DATA
+                  0x001e1a                  LCD_WR_DATA8
+                  0x001e28                  LCD_WR_REG
+                  0x001e36                  LCD_WR_REG_DATA
+                  0x001e4c                  Address_set
+                  0x001eae                  showhanzi
+                  0x001f24                  LCD_DrawPoint
+                  0x001f3e                  LCD_DrawPoint_big
+                  0x001f60                  LCD_DrawLine
+                  0x00203e                  LCD_DrawRectangle
+                  0x002074                  LCD_DrawCircle
+                  0x00217c                  LCD_SquareButton
+                  0x0022a8                  LCD_Fill
+                  0x0022ea                  LCD_ShowChar
+                  0x002404                  LCD_ShowNum
+                  0x0024a6                  LCD_Show2Num
+                  0x00250a                  LCD_ShowString
+                  0x00255e                  mypow
+                  0x0025aa                  tpstate
+                  0x0025b8                  spistar
+                  0x0025c6                  WriteCharTo7843
+                  0x00260e                  ReadFromCharFrom7843
+                  0x002654                  ADS_Read_AD
+                  0x002682                  ADS_Read_XY
+                  0x002738                  Read_ADS
+                  0x002774                  Read_ADS2
+                  0x002816                  Read_TP_Once
+                  0x002866                  Draw_Touch_Point
+                  0x0028c4                  Convert_Pos
+                  0x0029ba                  Touch_Adjust
+                  0x0031da                  point
+                  0x003264                  Touch_SquareDetect
+ .text            0x003364        0x5a4 main.o
+                  0x003364                  main
+                  0x0034ce                  LCD_Show
+                  0x003544                  PassKey
+                  0x0036d6                  KeyPress
+                  0x0037dc                  KeyDisplay
+ .text            0x003908         0xe6 UART.o
+                  0x003908                  UART1_Init
+                  0x003966                  WriteUART1
+                  0x00398e                  WriteUART1dec2string
+                  0x0039a4                  WriteStringUART1
+                  0x0039c2                  _U1TXInterrupt
+                  0x0039d6                  _U1RXInterrupt
+ .text            0x0039ee         0xe6 ADC.o
+                  0x0039ee                  ADC_Init
+                  0x003a56                  ADC_Convert
+ .text            0x003ad4         0x84 Timer1.o
+                  0x003ad4                  Timer1_Init
+                  0x003b02                  _T1Interrupt
+                  0x003b28                  LED_Blinking
+ .text            0x003b58         0x76 SPI.o
+                  0x003b58                  PPS_Unlock
+                  0x003b60                  PPS_Lock
+                  0x003b68                  SPI1_Init
+                  0x003ba6                  SPI1_SendReceiveData8
+ .text            0x003bce         0x68 IOCon.o
+                  0x003bce                  IO_Init
+
+.dinit            0x003c36         0x34
+ .dinit           0x003c36         0x34 data_init
+
+.text             0x003c6a         0x22
+ .text            0x003c6a         0x22 System.o
+                  0x003c6a                  MCU_Init
