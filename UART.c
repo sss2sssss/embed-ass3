@@ -44,7 +44,7 @@ void UART1_Init()
 }
 
 
-void WriteUART1(unsigned int data)
+void WriteUART1(unsigned int data)		//Write ASCII byte by byte
 {
     while (U1STAbits.TRMT==0);
     if(U1MODEbits.PDSEL == 0b00)
@@ -52,13 +52,13 @@ void WriteUART1(unsigned int data)
     else
         U1TXREG = data & 0xFF;
 }
-void WriteUART1dec2string(unsigned int data)
+void WriteUART1dec2string(unsigned int data)	//Write integer value by convert them to ASCII
 {
 	char buffer [3];
 	itoa(buffer,data,10);
 	WriteStringUART1(buffer);
 }
-void WriteStringUART1(const char * s)
+void WriteStringUART1(const char * s)		//Write String to the target
 {
     while(*s)
 	{

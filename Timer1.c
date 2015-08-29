@@ -29,7 +29,7 @@ void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
 
 void LED_Blinking()
 {
-	//LED 1 always blink at 1 Hz
+	//Heartbeat always blink at 1 Hz
 	Cycle1++;
 	if(Cycle1<=50)
 		LED1=1;

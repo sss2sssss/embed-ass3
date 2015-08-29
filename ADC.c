@@ -45,8 +45,8 @@ void ADC_Convert()
 	AD1CON1bits.ASAM = 0;                 //stop sampling
 	ADCValue = *ADCPtr;
 	int counter=0;
-	for(counter=0;counter<=3;counter++)
-	{
+	for(counter=0;counter<=3;counter++)	  //Green LED will blink two time to indicate
+	{									  //Complete of ADC
 		LED2=~LED2;
 		__delay_ms(250);
 	}

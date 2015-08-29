@@ -92,11 +92,11 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x454           0x67e  (1662)
 .const                       0x654              0x175e          0x230d  (8973)
-.text                       0x1db2              0x21e0          0x32d0  (13008)
-.dinit                      0x3f92                0x36            0x51  (81)
-.text                       0x3fc8                0x22            0x33  (51)
+.text                       0x1db2              0x21ec          0x32e2  (13026)
+.dinit                      0x3f9e                0x36            0x51  (81)
+.text                       0x3fd4                0x22            0x33  (51)
 
-                     Total program memory used (bytes):         0x5cdf  (23775) 18%
+                     Total program memory used (bytes):         0x5cf1  (23793) 18%
 
 
 Data Memory  [Origin = 0x800, Length = 0x4000]
@@ -239,46 +239,46 @@ External Symbols in Program Memory (by address):
                   0x00336e                  _point
                   0x0033f8                  _Touch_SquareDetect
                   0x0034f8                  _main
-                  0x0035f2                  _LCD_Show
-                  0x00366c                  _PassKey
-                  0x00387c                  _KeyPress
-                  0x003982                  _KeyDisplay
-                  0x003a96                  _main_page
-                  0x003ba2                  _UART1_Init
-                  0x003c00                  _WriteUART1
-                  0x003c28                  _WriteUART1dec2string
-                  0x003c3e                  _WriteStringUART1
-                  0x003c5c                  __U1TXInterrupt
-                  0x003c70                  __U1RXInterrupt
-                  0x003c88                  _ADC_Init
-                  0x003cf0                  _ADC_Convert
-                  0x003d6e                  _WifiReset
-                  0x003d7e                  _ConnectAP
-                  0x003d98                  _TCPServer
-                  0x003db2                  _StartConnect
-                  0x003e30                  _Timer1_Init
-                  0x003e5e                  __T1Interrupt
-                  0x003e84                  _LED_Blinking
-                  0x003eb4                  _PPS_Unlock
-                  0x003ebc                  _PPS_Lock
-                  0x003ec4                  _SPI1_Init
-                  0x003f02                  _SPI1_SendReceiveData8
-                  0x003f2a                  _IO_Init
-                  0x003fc8                  _MCU_Init
+                  0x00360a                  _LCD_Show
+                  0x003684                  _PassKey
+                  0x003894                  _KeyPress
+                  0x00399a                  _KeyDisplay
+                  0x003aae                  _main_page
+                  0x003bae                  _UART1_Init
+                  0x003c0c                  _WriteUART1
+                  0x003c34                  _WriteUART1dec2string
+                  0x003c4a                  _WriteStringUART1
+                  0x003c68                  __U1TXInterrupt
+                  0x003c7c                  __U1RXInterrupt
+                  0x003c94                  _ADC_Init
+                  0x003cfc                  _ADC_Convert
+                  0x003d7a                  _WifiReset
+                  0x003d8a                  _ConnectAP
+                  0x003da4                  _TCPServer
+                  0x003dbe                  _StartConnect
+                  0x003e3c                  _Timer1_Init
+                  0x003e6a                  __T1Interrupt
+                  0x003e90                  _LED_Blinking
+                  0x003ec0                  _PPS_Unlock
+                  0x003ec8                  _PPS_Lock
+                  0x003ed0                  _SPI1_Init
+                  0x003f0e                  _SPI1_SendReceiveData8
+                  0x003f36                  _IO_Init
+                  0x003fd4                  _MCU_Init
 
 External Symbols in Program Memory (by name):
 
-                  0x003cf0                  _ADC_Convert
-                  0x003c88                  _ADC_Init
+                  0x003cfc                  _ADC_Convert
+                  0x003c94                  _ADC_Init
                   0x0027e8                  _ADS_Read_AD
                   0x002816                  _ADS_Read_XY
                   0x001fe0                  _Address_set
-                  0x003d7e                  _ConnectAP
+                  0x003d8a                  _ConnectAP
                   0x002a58                  _Convert_Pos
                   0x0029fa                  _Draw_Touch_Point
-                  0x003f2a                  _IO_Init
-                  0x003982                  _KeyDisplay
-                  0x00387c                  _KeyPress
+                  0x003f36                  _IO_Init
+                  0x00399a                  _KeyDisplay
+                  0x003894                  _KeyPress
                   0x001f48                  _LCD_Clear
                   0x002208                  _LCD_DrawCircle
                   0x0020f4                  _LCD_DrawLine
@@ -287,7 +287,7 @@ External Symbols in Program Memory (by name):
                   0x0021d2                  _LCD_DrawRectangle
                   0x00243c                  _LCD_Fill
                   0x001db2                  _LCD_Init
-                  0x0035f2                  _LCD_Show
+                  0x00360a                  _LCD_Show
                   0x00263a                  _LCD_Show2Num
                   0x00247e                  _LCD_ShowChar
                   0x002598                  _LCD_ShowNum
@@ -298,32 +298,32 @@ External Symbols in Program Memory (by name):
                   0x001fbc                  _LCD_WR_REG
                   0x001fca                  _LCD_WR_REG_DATA
                   0x001f86                  _LCD_Writ_Bus
-                  0x003e84                  _LED_Blinking
-                  0x003fc8                  _MCU_Init
-                  0x003ebc                  _PPS_Lock
-                  0x003eb4                  _PPS_Unlock
-                  0x00366c                  _PassKey
+                  0x003e90                  _LED_Blinking
+                  0x003fd4                  _MCU_Init
+                  0x003ec8                  _PPS_Lock
+                  0x003ec0                  _PPS_Unlock
+                  0x003684                  _PassKey
                   0x0027a2                  _ReadFromCharFrom7843
                   0x0028cc                  _Read_ADS
                   0x002908                  _Read_ADS2
                   0x0029aa                  _Read_TP_Once
-                  0x003ec4                  _SPI1_Init
-                  0x003f02                  _SPI1_SendReceiveData8
-                  0x003db2                  _StartConnect
-                  0x003d98                  _TCPServer
-                  0x003e30                  _Timer1_Init
+                  0x003ed0                  _SPI1_Init
+                  0x003f0e                  _SPI1_SendReceiveData8
+                  0x003dbe                  _StartConnect
+                  0x003da4                  _TCPServer
+                  0x003e3c                  _Timer1_Init
                   0x002b4e                  _Touch_Adjust
                   0x0033f8                  _Touch_SquareDetect
-                  0x003ba2                  _UART1_Init
-                  0x003d6e                  _WifiReset
+                  0x003bae                  _UART1_Init
+                  0x003d7a                  _WifiReset
                   0x00275a                  _WriteCharTo7843
-                  0x003c3e                  _WriteStringUART1
-                  0x003c00                  _WriteUART1
-                  0x003c28                  _WriteUART1dec2string
+                  0x003c4a                  _WriteStringUART1
+                  0x003c0c                  _WriteUART1
+                  0x003c34                  _WriteUART1dec2string
                   0x0002b6                  __DefaultInterrupt
-                  0x003e5e                  __T1Interrupt
-                  0x003c70                  __U1RXInterrupt
-                  0x003c5c                  __U1TXInterrupt
+                  0x003e6a                  __T1Interrupt
+                  0x003c7c                  __U1RXInterrupt
+                  0x003c68                  __U1TXInterrupt
                   0x000408                  ___addsf3
                   0x00023c                  ___delay32
                   0x0002be                  ___divsf3
@@ -355,7 +355,7 @@ External Symbols in Program Memory (by name):
                   0x0006bf                  _image
                   0x000638                  _itoa
                   0x0034f8                  _main
-                  0x003a96                  _main_page
+                  0x003aae                  _main_page
                   0x0026f2                  _mypow
                   0x00336e                  _point
                   0x002042                  _showhanzi
@@ -581,7 +581,7 @@ __FUID3
                   0x000014          0x4 LONG 0x2b6 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x2b6 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x2b6 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x3e5e DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x3e6a DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x2b6 DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x2b6 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x2b6 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -589,8 +589,8 @@ __FUID3
                   0x000024          0x4 LONG 0x2b6 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000026          0x4 LONG 0x2b6 DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x2b6 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002a          0x4 LONG 0x3c70 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00002c          0x4 LONG 0x3c5c DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002a          0x4 LONG 0x3c7c DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00002c          0x4 LONG 0x3c68 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002e          0x4 LONG 0x2b6 DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000030          0x4 LONG 0x2b6 DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000032          0x4 LONG 0x2b6 DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
@@ -709,7 +709,7 @@ __FUID3
                   0x000114          0x4 LONG 0x2b6 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x2b6 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x2b6 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x3e5e DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x3e6a DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x2b6 DEFINED (__AltDMA0Interrupt)?ABSOLUTE (__AltDMA0Interrupt):DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x2b6 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x2b6 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -717,8 +717,8 @@ __FUID3
                   0x000124          0x4 LONG 0x2b6 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000126          0x4 LONG 0x2b6 DEFINED (__AltSPI1ErrInterrupt)?ABSOLUTE (__AltSPI1ErrInterrupt):DEFINED (__SPI1ErrInterrupt)?ABSOLUTE (__SPI1ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000128          0x4 LONG 0x2b6 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012a          0x4 LONG 0x3c70 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00012c          0x4 LONG 0x3c5c DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012a          0x4 LONG 0x3c7c DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00012c          0x4 LONG 0x3c68 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00012e          0x4 LONG 0x2b6 DEFINED (__AltADC1Interrupt)?ABSOLUTE (__AltADC1Interrupt):DEFINED (__ADC1Interrupt)?ABSOLUTE (__ADC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000130          0x4 LONG 0x2b6 DEFINED (__AltDMA1Interrupt)?ABSOLUTE (__AltDMA1Interrupt):DEFINED (__DMA1Interrupt)?ABSOLUTE (__DMA1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000132          0x4 LONG 0x2b6 DEFINED (__AltInterrupt15)?ABSOLUTE (__AltInterrupt15):DEFINED (__Interrupt15)?ABSOLUTE (__Interrupt15):ABSOLUTE (__DefaultInterrupt)
@@ -2021,7 +2021,7 @@ __c30_signature
  .const             0x9a30        0x2a4 main.o
  .const             0x9cd4         0xde Wifi.o
 
-.text             0x001db2       0x21e0
+.text             0x001db2       0x21ec
  .text            0x001db2       0x1746 LCD.o
                   0x001db2                  LCD_Init
                   0x001f48                  LCD_Clear
@@ -2058,43 +2058,43 @@ __c30_signature
                   0x002b4e                  Touch_Adjust
                   0x00336e                  point
                   0x0033f8                  Touch_SquareDetect
- .text            0x0034f8        0x6aa main.o
+ .text            0x0034f8        0x6b6 main.o
                   0x0034f8                  main
-                  0x0035f2                  LCD_Show
-                  0x00366c                  PassKey
-                  0x00387c                  KeyPress
-                  0x003982                  KeyDisplay
-                  0x003a96                  main_page
- .text            0x003ba2         0xe6 UART.o
-                  0x003ba2                  UART1_Init
-                  0x003c00                  WriteUART1
-                  0x003c28                  WriteUART1dec2string
-                  0x003c3e                  WriteStringUART1
-                  0x003c5c                  _U1TXInterrupt
-                  0x003c70                  _U1RXInterrupt
- .text            0x003c88         0xe6 ADC.o
-                  0x003c88                  ADC_Init
-                  0x003cf0                  ADC_Convert
- .text            0x003d6e         0xc2 Wifi.o
-                  0x003d6e                  WifiReset
-                  0x003d7e                  ConnectAP
-                  0x003d98                  TCPServer
-                  0x003db2                  StartConnect
- .text            0x003e30         0x84 Timer1.o
-                  0x003e30                  Timer1_Init
-                  0x003e5e                  _T1Interrupt
-                  0x003e84                  LED_Blinking
- .text            0x003eb4         0x76 SPI.o
-                  0x003eb4                  PPS_Unlock
-                  0x003ebc                  PPS_Lock
-                  0x003ec4                  SPI1_Init
-                  0x003f02                  SPI1_SendReceiveData8
- .text            0x003f2a         0x68 IOCon.o
-                  0x003f2a                  IO_Init
+                  0x00360a                  LCD_Show
+                  0x003684                  PassKey
+                  0x003894                  KeyPress
+                  0x00399a                  KeyDisplay
+                  0x003aae                  main_page
+ .text            0x003bae         0xe6 UART.o
+                  0x003bae                  UART1_Init
+                  0x003c0c                  WriteUART1
+                  0x003c34                  WriteUART1dec2string
+                  0x003c4a                  WriteStringUART1
+                  0x003c68                  _U1TXInterrupt
+                  0x003c7c                  _U1RXInterrupt
+ .text            0x003c94         0xe6 ADC.o
+                  0x003c94                  ADC_Init
+                  0x003cfc                  ADC_Convert
+ .text            0x003d7a         0xc2 Wifi.o
+                  0x003d7a                  WifiReset
+                  0x003d8a                  ConnectAP
+                  0x003da4                  TCPServer
+                  0x003dbe                  StartConnect
+ .text            0x003e3c         0x84 Timer1.o
+                  0x003e3c                  Timer1_Init
+                  0x003e6a                  _T1Interrupt
+                  0x003e90                  LED_Blinking
+ .text            0x003ec0         0x76 SPI.o
+                  0x003ec0                  PPS_Unlock
+                  0x003ec8                  PPS_Lock
+                  0x003ed0                  SPI1_Init
+                  0x003f0e                  SPI1_SendReceiveData8
+ .text            0x003f36         0x68 IOCon.o
+                  0x003f36                  IO_Init
 
-.dinit            0x003f92         0x36
- .dinit           0x003f92         0x36 data_init
+.dinit            0x003f9e         0x36
+ .dinit           0x003f9e         0x36 data_init
 
-.text             0x003fc8         0x22
- .text            0x003fc8         0x22 System.o
-                  0x003fc8                  MCU_Init
+.text             0x003fd4         0x22
+ .text            0x003fd4         0x22 System.o
+                  0x003fd4                  MCU_Init

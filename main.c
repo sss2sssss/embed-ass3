@@ -81,36 +81,31 @@ int main()
 			case 6:
 				if(temp_mode==1)
 				{
+					LCD_Clear(WHITE);
+					BACK_COLOR = WHITE;
+					POINT_COLOR = BLACK;
 					LCD_ShowString(10,100,"Current temperature");
 					LCD_ShowString(10,120,"in degree celsius:");
 					LCD_ShowString(10,150,"N.A.");
 					StartConnect();
 					temp_mode=2;
-					//mode=8;
 				}
 				if(temp_mode==2)
 				{
+					LCD_Clear(WHITE);
+					BACK_COLOR = WHITE;
+					POINT_COLOR = BLACK;
 					LCD_ShowString(10,100,"Current temperature");
 					LCD_ShowString(10,120,"in degree celsius:");
 					LCD_ShowNum(10,150,temp_out,2);
 					StartConnect();
-					//mode=8;
 				}
 				break;
-			/*case 8:
-				WriteStringUART1("AT+CIPCLOSE=0\r\n");
-				__delay_ms(10000);
-				LCD_Clear(WHITE);
-				BACK_COLOR = WHITE;
-				POINT_COLOR = BLACK;
-				temp_mode=2;
-				mode=6;
-				break;*/
 		}
 	}
 }
 
-void LCD_Show(void)
+void LCD_Show(void)			//Start of the screen
 {
 	POINT_COLOR = RED;
     LCD_DrawRectangle(0,0,239,319);
@@ -130,7 +125,7 @@ void LCD_Show(void)
 	}
 }
 
-void PassKey(void)
+void PassKey(void)			//Password screen
 {
     LCD_ShowString(0,0,"Press four number password");
 	LCD_ShowString(0,20,"to access.");
@@ -214,7 +209,7 @@ void PassKey(void)
 
 }
 
-char KeyPress(void)
+char KeyPress(void)			//Detect the keypress
 {
     if(Touch_SquareDetect(0,79,80))
     {
@@ -271,7 +266,7 @@ char KeyPress(void)
     }
 }
 
-void KeyDisplay(char key)
+void KeyDisplay(char key)		//Display what key is pressed
 {
     if (key == 1)
     {
@@ -346,7 +341,7 @@ void KeyDisplay(char key)
     }
 }
 
-void main_page(void)
+void main_page(void)			//Control Panel of the system
 {
 	LCD_ShowString(50,0,"Control Panel");
 	LCD_ShowString(50,20,"Poultry Farm");
@@ -375,9 +370,6 @@ void main_page(void)
 	}
 	if(Touch_SquareDetect(160,159,80))
 	{
-		LCD_Clear(WHITE);
-		BACK_COLOR = WHITE;
-		POINT_COLOR = BLACK;
 		mode=6;
 	}
 	if(Touch_SquareDetect(80,239,80))
